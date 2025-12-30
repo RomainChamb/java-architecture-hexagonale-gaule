@@ -201,7 +201,7 @@ public class JavanoramixTest {
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         // Act + Assert
-        IngrédientManquantException exceptionObtenue = assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(RECETTE_DES_FRAIFLES));
+        assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(RECETTE_DES_FRAIFLES));
 
     }
 
