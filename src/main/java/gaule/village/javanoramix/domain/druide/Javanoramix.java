@@ -29,7 +29,7 @@ public class Javanoramix implements Druide {
                 dernierIngrédientObtenu = bouillir(étape);
             }
             stock.ajouterIngrédient(dernierIngrédientObtenu);
-            System.out.printf("Réservation de %d * %s\n", dernierIngrédientObtenu.quantité(), dernierIngrédientObtenu.nom());
+            System.out.printf("Réservation de %s\n", dernierIngrédientObtenu.toString());
         }
 
         return servir(dernierIngrédientObtenu);
@@ -61,7 +61,7 @@ public class Javanoramix implements Druide {
 
     private Ingrédient mélanger(Étape étape) {
         Ingrédient avec = étape.avec().orElseThrow();
-        System.out.printf("Mélanger %d * '%s' avec %d * '%s'\n", étape.base().quantité(), étape.base().nom(), avec.quantité(), avec.nom());
+        System.out.printf("Mélanger %s avec %s\n", étape.base(), avec);
         if (!stock.vérifierDisponibilité(étape.base()) || !stock.vérifierDisponibilité(avec)) {
             throw new IngrédientManquantException();
         }
@@ -69,14 +69,15 @@ public class Javanoramix implements Druide {
     }
 
     private Ingrédient bouillir(Étape étape) {
-        System.out.printf("Mise à bouillir de %d * %s\n", étape.base().quantité(), étape.base().nom());
+        System.out.printf("Mise à bouillir de %s\n", étape.base());
         cuiseur.cuire(étape.base(), étape.nomIngrédientObtenu());
         return cuiseur.prélever();
     }
 
 
     private Plat servir(Ingrédient ingrédient) {
-        System.out.printf("Le plat %d * %s est prêt !\n", ingrédient.quantité(), ingrédient.nom());
-        return new Plat(ingrédient.nom(), ingrédient.quantité());
+        var plat = new Plat(ingrédient.nom(), ingrédient.quantité());
+        System.out.printf("Le plat %s est prêt !\n", plat);
+        return plat;
     }
 }
