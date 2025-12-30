@@ -2,6 +2,9 @@ package gaule.village.javanoramix.domain.druide;
 
 import gaule.village.javanoramix.domain.adapter.CuiseurDouble;
 import gaule.village.javanoramix.domain.adapter.StockDouble;
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
+import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
+import gaule.village.javanoramix.domain.druide.stock.StockPort;
 import gaule.village.javanoramix.domain.recette.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

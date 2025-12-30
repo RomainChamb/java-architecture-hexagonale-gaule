@@ -1,5 +1,8 @@
 package gaule.village.javanoramix.domain.druide;
 
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
+import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
+import gaule.village.javanoramix.domain.druide.stock.StockPort;
 import gaule.village.javanoramix.domain.recette.*;
 
 public class Javanoramix implements Druide {
@@ -76,7 +79,6 @@ public class Javanoramix implements Druide {
         cuiseur.cuire(ingrédientDeBase, étape.nomIngrédientObtenu());
         return cuiseur.prélever();
     }
-
 
     private Plat servir(Ingrédient ingrédient) {
         var plat = new Plat(ingrédient.nom(), ingrédient.quantité());

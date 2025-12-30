@@ -1,4 +1,4 @@
-package gaule.village.javanoramix.domain.druide;
+package gaule.village.javanoramix.domain.druide.cuiseur;
 
 import gaule.village.javanoramix.domain.recette.Ingrédient;
 import gaule.village.javanoramix.domain.recette.Température;

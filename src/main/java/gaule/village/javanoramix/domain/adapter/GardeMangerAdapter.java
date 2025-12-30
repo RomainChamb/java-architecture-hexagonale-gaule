@@ -1,6 +1,6 @@
 package gaule.village.javanoramix.domain.adapter;
 
-import gaule.village.javanoramix.domain.druide.StockPort;
+import gaule.village.javanoramix.domain.druide.stock.StockPort;
 import gaule.village.javanoramix.domain.recette.Ingrédient;
 import gaule.village.javanoramix.infrastructure.GardeManger;
 
