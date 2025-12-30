@@ -21,7 +21,7 @@ public class CuiseurDouble implements AppareilDeCuissonPort {
             while (this.températureActuelle.degré() < températureSouhaitée.degré()) {
                 try {
                     Thread.sleep(300);
-                    setTempératureActuelle(new Température(this.températureActuelle.degré() + 10, températureActuelle.unité()));
+                    setTempératureActuelle(new Température(this.températureActuelle.degré() + 10));
                 } catch (InterruptedException _) {
                     Thread.currentThread().interrupt();
                 }
@@ -48,6 +48,12 @@ public class CuiseurDouble implements AppareilDeCuissonPort {
 
     @Override
     public Ingrédient prélever() {
+        var ingrédientÀPrélever = this.ingrédientEnCuisson;
+        this.ingrédientEnCuisson = Ingrédient.INGRÉDIENT_VIDE;
+        return ingrédientÀPrélever;
+    }
+
+    public Ingrédient getIngrédientEnCuisson() {
         return this.ingrédientEnCuisson;
     }
 }

@@ -1,8 +1,7 @@
 package gaule.village.javanoramix.domain.recette;
 
 public record Température(
-        int degré,
-        UnitéTempérature unité) {
+        int degré) {
 
-    public static final Température ZERO_CELCIUS = new Température(0, UnitéTempérature.CELCIUS);
+    public static final Température ZERO_CELCIUS = new Température(0);
 }

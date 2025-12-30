@@ -132,7 +132,7 @@ public class JavanoramixTest {
             List.of(
                     new Ingrédient("fraise", 12)
             ),
-            Optional.of(new Température(90, UnitéTempérature.CELCIUS)),
+            Optional.of(new Température(90)),
             List.of(
                     new Étape(
                             "Faire bouillir les fraises",
@@ -150,7 +150,7 @@ public class JavanoramixTest {
                     new Ingrédient("trèfle à 4 feuilles", 8),
                     new Ingrédient("fraise", 12)
             ),
-            Optional.of(new Température(90, UnitéTempérature.CELCIUS)),
+            Optional.of(new Température(90)),
             List.of(
                     new Étape(
                             "Mélanger les trèfles et les fraises",
@@ -299,7 +299,7 @@ public class JavanoramixTest {
                         new Ingrédient("fraise", 12)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        CuiseurDouble cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraise bouillie", 12);
@@ -310,6 +310,7 @@ public class JavanoramixTest {
         // Assert
         assertEquals(platAttendu, platObtenu);
         assertEquals(0, stock.getContenu().size());
+        assertEquals(Ingrédient.INGRÉDIENT_VIDE, cuiseur.getIngrédientEnCuisson());
     }
 
     @Test
@@ -321,7 +322,7 @@ public class JavanoramixTest {
                         new Ingrédient("trèfle à 4 feuilles", 8)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        CuiseurDouble cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraifle bouillie", 20);
@@ -332,6 +333,7 @@ public class JavanoramixTest {
         // Assert
         assertEquals(platAttendu, platObtenu);
         assertEquals(0, stock.getContenu().size());
+        assertEquals(Ingrédient.INGRÉDIENT_VIDE, cuiseur.getIngrédientEnCuisson());
     }
 
     @Test
@@ -363,7 +365,7 @@ public class JavanoramixTest {
                         new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        CuiseurDouble cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("potion magique", 35);
@@ -374,5 +376,6 @@ public class JavanoramixTest {
         // Assert
         assertEquals(platAttendu, platObtenu);
         assertEquals(0, stock.getContenu().size());
+        assertEquals(Ingrédient.INGRÉDIENT_VIDE, cuiseur.getIngrédientEnCuisson());
     }
 }

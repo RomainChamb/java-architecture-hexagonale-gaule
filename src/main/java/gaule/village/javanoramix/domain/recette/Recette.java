@@ -18,7 +18,7 @@ public record Recette(
                     new Ingrédient("pincée de curcuma", 10),
                     new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
             ),
-            Optional.of(new Température(90, UnitéTempérature.CELCIUS)),
+            Optional.of(new Température(90)),
             List.of(
                     new Étape(
                             "Mélanger les trèfles et les fraises",

@@ -54,7 +54,7 @@ public class Javanoramix implements Druide {
             cuiseur.préchauffer(températureSouhaitée);
             while (cuiseur.vérifierTempérature().degré() < températureSouhaitée.degré()) {
                 try {
-                    System.out.printf("Préchauffage du cuiseur en cours : %d %s -> %d %s\n", cuiseur.vérifierTempérature().degré(), cuiseur.vérifierTempérature().unité().label, températureSouhaitée.degré(), cuiseur.vérifierTempérature().unité().label);
+                    System.out.printf("Préchauffage du cuiseur en cours : %d °C -> %d °C\n", cuiseur.vérifierTempérature().degré(), températureSouhaitée.degré());
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -76,6 +76,9 @@ public class Javanoramix implements Druide {
 
     private Ingrédient bouillir(Étape étape) {
         System.out.printf("Mise à bouillir de %s\n", étape.base());
+        if (!stock.vérifierDisponibilité(étape.base())) {
+            throw new IngrédientManquantException();
+        }
         var ingrédientDeBase = this.stock.récupérerIngrédient(étape.base()).orElseThrow();
         cuiseur.cuire(ingrédientDeBase, étape.nomIngrédientObtenu());
         return cuiseur.prélever();
