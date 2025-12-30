@@ -65,12 +65,15 @@ public class Javanoramix implements Druide {
         if (!stock.vérifierDisponibilité(étape.base()) || !stock.vérifierDisponibilité(avec)) {
             throw new IngrédientManquantException();
         }
-        return new Ingrédient(étape.nomIngrédientObtenu(), étape.base().quantité() + avec.quantité());
+        var ingrédientDeBase = this.stock.récupérerIngrédient(étape.base()).orElseThrow();
+        var ingrédientAvec = this.stock.récupérerIngrédient(avec).orElseThrow();
+        return new Ingrédient(étape.nomIngrédientObtenu(), ingrédientDeBase.quantité() + ingrédientAvec.quantité());
     }
 
     private Ingrédient bouillir(Étape étape) {
         System.out.printf("Mise à bouillir de %s\n", étape.base());
-        cuiseur.cuire(étape.base(), étape.nomIngrédientObtenu());
+        var ingrédientDeBase = this.stock.récupérerIngrédient(étape.base()).orElseThrow();
+        cuiseur.cuire(ingrédientDeBase, étape.nomIngrédientObtenu());
         return cuiseur.prélever();
     }
 
