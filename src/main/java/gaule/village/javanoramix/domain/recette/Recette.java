@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public record Recette(
+        String nom,
         List<Ingrédient> ingrédients,
+        Optional<Température> préchauffage,
         List<Étape> déroulé) {
 
-    public static Recette PotionMagique = new Recette(
+    public static Recette RECETTE_DE_LA_POTION_MAGIQUE = new Recette(
+            "Recette de la potion magique",
             List.of(
                     new Ingrédient("trèfle à 4 feuilles", 8),
                     new Ingrédient("fraise", 12),
@@ -15,6 +18,7 @@ public record Recette(
                     new Ingrédient("pincée de curcuma", 10),
                     new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
             ),
+            Optional.of(new Température(90, UnitéTempérature.CELCIUS)),
             List.of(
                     new Étape(
                             "Mélanger les trèfles et les fraises",

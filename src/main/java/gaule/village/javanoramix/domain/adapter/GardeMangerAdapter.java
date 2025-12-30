@@ -21,6 +21,6 @@ public class GardeMangerAdapter implements StockPort {
 
     @Override
     public Optional<Ingrédient> récupérerIngrédient(Ingrédient ingrédient) {
-        return null;
+        return Optional.empty();
     }
 }
