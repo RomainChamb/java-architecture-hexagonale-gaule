@@ -172,7 +172,7 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraifles() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
             new ArrayList<>(List.of(
                 new Ingrédient("fraise", 12),
                 new Ingrédient("trèfle à 4 feuilles", 8)
@@ -188,6 +188,7 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(0, stock.getContenu().size());
     }
 
     @Test
@@ -224,7 +225,7 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraiflesSurplusIngrédients() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12 + 1),
                         new Ingrédient("trèfle à 4 feuilles", 8)
@@ -240,12 +241,13 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(1, stock.getContenu().size());
     }
 
     @Test
     void préparerDesFraiflesAuGui() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12),
                         new Ingrédient("trèfle à 4 feuilles", 8),
@@ -262,6 +264,7 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(0, stock.getContenu().size());
     }
 
     @Test
@@ -291,7 +294,7 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraisesBouillies() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12)
                 ))
@@ -306,12 +309,13 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(0, stock.getContenu().size());
     }
 
     @Test
     void préparerDesFraiflesBouillies() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12),
                         new Ingrédient("trèfle à 4 feuilles", 8)
@@ -327,6 +331,7 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(0, stock.getContenu().size());
     }
 
     @Test
@@ -349,7 +354,7 @@ public class JavanoramixTest {
     @Test
     void préparerDeLaPotionMagique() {
         // Arrange
-        StockPort stock = new StockDouble(
+        StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("trèfle à 4 feuilles", 8),
                         new Ingrédient("fraise", 12),
@@ -368,5 +373,6 @@ public class JavanoramixTest {
 
         // Assert
         assertEquals(platAttendu, platObtenu);
+        assertEquals(0, stock.getContenu().size());
     }
 }

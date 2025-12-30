@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface StockPort {
     boolean vérifierDisponibilité(Ingrédient ingrédient);
-    void ajouterIngrédient(Ingrédient ingrédient);
+    void stockerIngrédient(Ingrédient ingrédient);
     Optional<Ingrédient> récupérerIngrédient(Ingrédient ingrédient);
 }

@@ -15,7 +15,7 @@ public class GardeMangerAdapter implements StockPort {
     }
 
     @Override
-    public void ajouterIngrédient(Ingrédient ingrédient) {
+    public void stockerIngrédient(Ingrédient ingrédient) {
 
     }
 

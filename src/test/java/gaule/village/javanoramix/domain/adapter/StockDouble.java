@@ -24,7 +24,7 @@ public class StockDouble implements StockPort {
     }
 
     @Override
-    public void ajouterIngrédient(Ingrédient ingrédient) {
+    public void stockerIngrédient(Ingrédient ingrédient) {
         this.contenu.add(ingrédient);
     }
 
@@ -38,11 +38,18 @@ public class StockDouble implements StockPort {
             var ingrédientCourant = this.contenu.get(i);
             if (Objects.equals(ingrédientCourant.nom(), ingrédientRecherché.nom())) {
                 this.contenu.remove(i);
-                this.contenu.add(new Ingrédient(ingrédientCourant.nom(), ingrédientCourant.quantité() - ingrédientRecherché.quantité()));
+                var nouvelleQuantité = ingrédientCourant.quantité() - ingrédientRecherché.quantité();
+                if (nouvelleQuantité > 0) {
+                    this.contenu.add(new Ingrédient(ingrédientCourant.nom(), nouvelleQuantité));
+                }
                 return Optional.of(ingrédientRecherché);
             }
         }
 
         return Optional.empty();
+    }
+
+    public List<Ingrédient> getContenu() {
+        return contenu;
     }
 }

@@ -18,6 +18,7 @@ public class Javanoramix implements Druide {
     @Override
     public Plat préparer(Recette recetteÀPréparer) {
         System.out.printf("Préparation de la recette : %s\n", recetteÀPréparer.nom());
+
         vérificationDisponibilitéIngrédients(recetteÀPréparer);
 
         préchauffage(recetteÀPréparer);
@@ -31,7 +32,7 @@ public class Javanoramix implements Druide {
             if (étape.action() == Action.BOUILLIR) {
                 dernierIngrédientObtenu = bouillir(étape);
             }
-            stock.ajouterIngrédient(dernierIngrédientObtenu);
+            stock.stockerIngrédient(dernierIngrédientObtenu);
             System.out.printf("Réservation de %s\n", dernierIngrédientObtenu.toString());
         }
 
@@ -81,7 +82,8 @@ public class Javanoramix implements Druide {
     }
 
     private Plat servir(Ingrédient ingrédient) {
-        var plat = new Plat(ingrédient.nom(), ingrédient.quantité());
+        var ingrédientÀServir = this.stock.récupérerIngrédient(ingrédient).orElseThrow();
+        var plat = new Plat(ingrédientÀServir.nom(), ingrédientÀServir.quantité());
         System.out.printf("Le plat %s est prêt !\n", plat);
         return plat;
     }
