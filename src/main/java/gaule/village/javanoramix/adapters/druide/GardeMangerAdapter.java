@@ -1,4 +1,4 @@
-package gaule.village.javanoramix.domain.adapter;
+package gaule.village.javanoramix.adapters.druide;
 
 import gaule.village.javanoramix.domain.druide.stock.StockPort;
 import gaule.village.javanoramix.domain.recette.Ingrédient;

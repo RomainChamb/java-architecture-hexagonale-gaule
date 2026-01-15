@@ -22,7 +22,7 @@ public class JavanoramixConfiguration {
     @Bean
     GardeManger gardeManger() {
         var contenu = new ArrayList<>(List.of(
-                        new Ingrédient("poisson frais de lutèce", 100),
+                        new Ingrédient("poisson frais arrivant de Lutèce par char à bœufs", 100),
                         new Ingrédient("trèfle à 4 feuilles", 8),
                         new Ingrédient("fraise", 12),
                         new Ingrédient("once de lait de sanglier", 4),
