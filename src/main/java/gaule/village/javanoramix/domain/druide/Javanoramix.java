@@ -19,9 +19,9 @@ public class Javanoramix implements Druide {
     public Plat préparer(Recette recetteÀPréparer) {
         System.out.printf("Préparation de la recette : %s\n", recetteÀPréparer.nom());
 
-        vérificationDisponibilitéIngrédients(recetteÀPréparer);
+        vérifierDisponibilitéIngrédients(recetteÀPréparer);
 
-        préchauffage(recetteÀPréparer);
+        préchauffer(recetteÀPréparer);
 
         Ingrédient dernierIngrédientObtenu = Ingrédient.INGRÉDIENT_VIDE;
         for (Étape étape : recetteÀPréparer.déroulé()) {
@@ -39,7 +39,7 @@ public class Javanoramix implements Druide {
         return servir(dernierIngrédientObtenu);
     }
 
-    private void vérificationDisponibilitéIngrédients(Recette recetteÀPréparer) {
+    private void vérifierDisponibilitéIngrédients(Recette recetteÀPréparer) {
         System.out.println("Vérification de la disponibilité des ingrédients");
         boolean ingrédientsDisponibles = recetteÀPréparer.ingrédients()
                 .stream()
@@ -48,7 +48,7 @@ public class Javanoramix implements Druide {
         if (!ingrédientsDisponibles) throw new IngrédientManquantException();
     }
 
-    private void préchauffage(Recette recetteÀPréparer) {
+    private void préchauffer(Recette recetteÀPréparer) {
         if (recetteÀPréparer.préchauffage().isPresent()) {
             var températureSouhaitée = recetteÀPréparer.préchauffage().get();
             cuiseur.préchauffer(températureSouhaitée);
