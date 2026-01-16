@@ -2,9 +2,9 @@ package gaule.village.javanoramix.domain.druide;
 
 import gaule.village.javanoramix.domain.adapter.CuiseurDouble;
 import gaule.village.javanoramix.domain.adapter.StockDouble;
-import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
-import gaule.village.javanoramix.domain.druide.stock.StockPort;
+import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -178,7 +178,7 @@ public class JavanoramixTest {
                 new Ingrédient("trèfle à 4 feuilles", 8)
             ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraifle", 20);
@@ -194,10 +194,10 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraiflesIngrédientAbsent() {
         // Arrange
-        StockPort stock = new StockDouble(
+        Stock stock = new StockDouble(
                 new ArrayList<>(List.of(new Ingrédient("fraise", 12)))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         // Act + Assert
@@ -208,13 +208,13 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraiflesIngrédientManquant() {
         // Arrange
-        StockPort stock = new StockDouble(
+        Stock stock = new StockDouble(
             new ArrayList<>(List.of(
                 new Ingrédient("fraise", 12 - 1),
                 new Ingrédient("trèfle à 4 feuilles", 8)
             ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         // Act + Assert
@@ -231,7 +231,7 @@ public class JavanoramixTest {
                         new Ingrédient("trèfle à 4 feuilles", 8)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraifle", 20);
@@ -254,7 +254,7 @@ public class JavanoramixTest {
                         new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraifle au gui", 21);
@@ -270,7 +270,7 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraiflesAuGuiAvecDuLaitDoré() {
         // Arrange
-        StockPort stock = new StockDouble(
+        Stock stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12),
                         new Ingrédient("trèfle à 4 feuilles", 8),
@@ -279,7 +279,7 @@ public class JavanoramixTest {
                         new Ingrédient("pincée de curcuma", 10)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         Plat platAttendu = new Plat("fraifle au gui et lait doré", 35);
@@ -339,14 +339,14 @@ public class JavanoramixTest {
     @Test
     void préparerDesFraiflesAuGuiPasAssezDeFraifles() {
         // Arrange
-        StockPort stock = new StockDouble(
+        Stock stock = new StockDouble(
                 new ArrayList<>(List.of(
                         new Ingrédient("fraise", 12),
                         new Ingrédient("trèfle à 4 feuilles", 8),
                         new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
                 ))
         );
-        AppareilDeCuissonPort cuiseur = new CuiseurDouble();
+        AppareilDeCuisson cuiseur = new CuiseurDouble();
         Druide javanoramix = new Javanoramix(stock, cuiseur);
 
         // Act + Assert

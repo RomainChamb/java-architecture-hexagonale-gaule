@@ -27,9 +27,9 @@ public class ArchitectureHexagonaleTest {
                     .resideOutsideOfPackages("..domain..", "java..", "jakarta..");
 
     @ArchTest
-    public static final ArchRule infrastructureNeDoitDependreQueDeDomainInfrastructureOuSpring =
+    public static final ArchRule adaptersDoitDependreDeDomainInfrastructureEtSpring =
             classes()
-                    .that().resideInAPackage("..infrastructure..")
+                    .that().resideInAPackage("..adapters..")
                     .should().onlyDependOnClassesThat()
                     .resideInAnyPackage("..domain..", "..infrastructure..", "java..", "jakarta..", "org.springframework..");
 

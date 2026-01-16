@@ -2,8 +2,8 @@ package gaule.village.javanoramix.config;
 
 import gaule.village.javanoramix.domain.druide.Druide;
 import gaule.village.javanoramix.domain.druide.Javanoramix;
-import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
-import gaule.village.javanoramix.domain.druide.stock.StockPort;
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
+import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.Ingrédient;
 import gaule.village.javanoramix.infrastructure.GardeManger;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import java.util.List;
 @Configuration
 public class JavanoramixConfiguration {
     @Bean
-    Druide druide(StockPort stock, AppareilDeCuissonPort appareilDeCuisson) {
+    Druide druide(Stock stock, AppareilDeCuisson appareilDeCuisson) {
         return new Javanoramix(stock, appareilDeCuisson);
     }
 

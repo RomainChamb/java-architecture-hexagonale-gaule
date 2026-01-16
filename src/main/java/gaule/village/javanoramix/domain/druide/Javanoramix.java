@@ -1,16 +1,16 @@
 package gaule.village.javanoramix.domain.druide;
 
-import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
-import gaule.village.javanoramix.domain.druide.stock.StockPort;
+import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.*;
 
 public class Javanoramix implements Druide {
 
-    private final StockPort stock;
-    private final AppareilDeCuissonPort cuiseur;
+    private final Stock stock;
+    private final AppareilDeCuisson cuiseur;
 
-    public Javanoramix(StockPort stock, AppareilDeCuissonPort cuiseur) {
+    public Javanoramix(Stock stock, AppareilDeCuisson cuiseur) {
         this.stock = stock;
         this.cuiseur = cuiseur;
     }

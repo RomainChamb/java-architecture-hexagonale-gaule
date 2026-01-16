@@ -1,6 +1,6 @@
 package gaule.village.javanoramix.adapters.druide;
 
-import gaule.village.javanoramix.domain.druide.stock.StockPort;
+import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.Ingrédient;
 import gaule.village.javanoramix.infrastructure.GardeManger;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class GardeMangerAdapter implements StockPort {
+public class GardeMangerAdapter implements Stock {
     private final GardeManger gardeManger;
 
     public GardeMangerAdapter(GardeManger gardeManger) {

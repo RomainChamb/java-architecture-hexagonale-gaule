@@ -1,13 +1,13 @@
 package gaule.village.javanoramix.adapters.druide;
 
-import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuissonPort;
+import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.recette.Ingrédient;
 import gaule.village.javanoramix.domain.recette.Température;
 import gaule.village.javanoramix.infrastructure.Thermomix;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ThermomixAdapter implements AppareilDeCuissonPort {
+public class ThermomixAdapter implements AppareilDeCuisson {
     private final Thermomix thermomix;
 
     public ThermomixAdapter(Thermomix thermomix) {
