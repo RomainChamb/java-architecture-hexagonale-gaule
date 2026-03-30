@@ -1,5 +1,6 @@
 package gaule.village.javanoramix.config;
 
+import gaule.village.javanoramix.domain.barde.Barde;
 import gaule.village.javanoramix.domain.druide.Druide;
 import gaule.village.javanoramix.domain.druide.Javanoramix;
 import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
@@ -15,8 +16,8 @@ import java.util.List;
 @Configuration
 public class JavanoramixConfiguration {
     @Bean
-    Druide druide(Stock stock, AppareilDeCuisson appareilDeCuisson) {
-        return new Javanoramix(stock, appareilDeCuisson);
+    Druide druide(Stock stock, AppareilDeCuisson appareilDeCuisson, Barde barde) {
+        return new Javanoramix(stock, appareilDeCuisson, barde);
     }
 
     @Bean

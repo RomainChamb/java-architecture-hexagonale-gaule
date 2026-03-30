@@ -1,5 +1,7 @@
 package gaule.village.javanoramix.domain.druide;
 
+import gaule.village.javanoramix.domain.barde.Barde;
+import gaule.village.javanoramix.domain.shared.Niveau;
 import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
 import gaule.village.javanoramix.domain.druide.stock.Stock;
@@ -9,10 +11,12 @@ public class Javanoramix implements Druide {
 
     private final Stock stock;
     private final AppareilDeCuisson cuiseur;
+    private final Barde barde;
 
-    public Javanoramix(Stock stock, AppareilDeCuisson cuiseur) {
+    public Javanoramix(Stock stock, AppareilDeCuisson cuiseur, Barde barde) {
         this.stock = stock;
         this.cuiseur = cuiseur;
+        this.barde = barde;
     }
 
     @Override
@@ -88,6 +92,7 @@ public class Javanoramix implements Druide {
         var ingrédientÀServir = this.stock.récupérerIngrédient(ingrédient).orElseThrow();
         var plat = new Plat(ingrédientÀServir.nom(), ingrédientÀServir.quantité());
         System.out.printf("Le plat %s est prêt !\n", plat);
+        barde.chanter("Le plat %s est prêt !".formatted(plat.nom()), Niveau.NORMAL);
         return plat;
     }
 }

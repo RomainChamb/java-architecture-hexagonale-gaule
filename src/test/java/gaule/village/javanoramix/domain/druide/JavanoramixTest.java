@@ -1,12 +1,15 @@
 package gaule.village.javanoramix.domain.druide;
 
+import gaule.village.javanoramix.domain.adapter.BardeDouble;
 import gaule.village.javanoramix.domain.adapter.CuiseurDouble;
 import gaule.village.javanoramix.domain.adapter.StockDouble;
+import gaule.village.javanoramix.domain.shared.Niveau;
 import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
 import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.*;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -179,7 +182,8 @@ public class JavanoramixTest {
             ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraifle", 20);
 
@@ -198,7 +202,8 @@ public class JavanoramixTest {
                 new ArrayList<>(List.of(new Ingrédient("fraise", 12)))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         // Act + Assert
         assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(RECETTE_DES_FRAIFLES));
@@ -215,7 +220,8 @@ public class JavanoramixTest {
             ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         // Act + Assert
         assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(RECETTE_DES_FRAIFLES));
@@ -232,7 +238,8 @@ public class JavanoramixTest {
                 ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraifle", 20);
 
@@ -255,7 +262,8 @@ public class JavanoramixTest {
                 ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraifle au gui", 21);
 
@@ -280,7 +288,8 @@ public class JavanoramixTest {
                 ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraifle au gui et lait doré", 35);
 
@@ -300,7 +309,8 @@ public class JavanoramixTest {
                 ))
         );
         CuiseurDouble cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraise bouillie", 12);
 
@@ -323,7 +333,8 @@ public class JavanoramixTest {
                 ))
         );
         CuiseurDouble cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("fraifle bouillie", 20);
 
@@ -347,7 +358,8 @@ public class JavanoramixTest {
                 ))
         );
         AppareilDeCuisson cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         // Act + Assert
         assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(RECETTE_DES_FRAIFLES_AU_GUI_PAS_ASSEZ_DE_FRAIFLES));
@@ -366,7 +378,8 @@ public class JavanoramixTest {
                 ))
         );
         CuiseurDouble cuiseur = new CuiseurDouble();
-        Druide javanoramix = new Javanoramix(stock, cuiseur);
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
 
         Plat platAttendu = new Plat("potion magique", 35);
 
@@ -377,5 +390,30 @@ public class JavanoramixTest {
         assertEquals(platAttendu, platObtenu);
         assertEquals(0, stock.getContenu().size());
         assertEquals(Ingrédient.INGRÉDIENT_VIDE, cuiseur.getIngrédientEnCuisson());
+    }
+
+    @Test
+    void prévenirQueLaPotionMagiqueEstPrête() {
+        // Arrange
+        StockDouble stock = new StockDouble(
+                new ArrayList<>(List.of(
+                        new Ingrédient("trèfle à 4 feuilles", 8),
+                        new Ingrédient("fraise", 12),
+                        new Ingrédient("once de lait de sanglier", 4),
+                        new Ingrédient("pincée de curcuma", 10),
+                        new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
+                ))
+        );
+        CuiseurDouble cuiseur = new CuiseurDouble();
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
+
+
+        // Act
+        javanoramix.préparer(Recette.RECETTE_DE_LA_POTION_MAGIQUE);
+
+        // Assert
+        assertEquals(barde.message, "Le plat potion magique est prêt !");
+        assertEquals(barde.niveau, Niveau.NORMAL);
     }
 }
