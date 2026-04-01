@@ -40,6 +40,7 @@ public class Javanoramix implements Druide {
             System.out.printf("Réservation de %s\n", dernierIngrédientObtenu.toString());
         }
 
+        alerterSiIlManqueDesIngrédientsPourLaProchaineFois(recetteÀPréparer);
         return servir(dernierIngrédientObtenu);
     }
 
@@ -86,6 +87,14 @@ public class Javanoramix implements Druide {
         var ingrédientDeBase = this.stock.récupérerIngrédient(étape.base()).orElseThrow();
         cuiseur.cuire(ingrédientDeBase, étape.nomIngrédientObtenu());
         return cuiseur.prélever();
+    }
+
+    private void alerterSiIlManqueDesIngrédientsPourLaProchaineFois(Recette recetteÀPréparer) {
+        try {
+            vérifierDisponibilitéIngrédients(recetteÀPréparer);
+        } catch (IngrédientManquantException e) {
+            barde.chanter("Il manque des ingrédients pour la prochaine fois !", Niveau.IMPORTANT);
+        }
     }
 
     private Plat servir(Ingrédient ingrédient) {

@@ -397,6 +397,31 @@ public class JavanoramixTest {
         // Arrange
         StockDouble stock = new StockDouble(
                 new ArrayList<>(List.of(
+                        new Ingrédient("trèfle à 4 feuilles", 16),
+                        new Ingrédient("fraise", 24),
+                        new Ingrédient("once de lait de sanglier", 8),
+                        new Ingrédient("pincée de curcuma", 20),
+                        new Ingrédient("feuille de gui coupée à la serpe d'or", 2)
+                ))
+        );
+        CuiseurDouble cuiseur = new CuiseurDouble();
+        BardeDouble barde = new BardeDouble();
+        Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
+
+
+        // Act
+        javanoramix.préparer(Recette.RECETTE_DE_LA_POTION_MAGIQUE);
+
+        // Assert
+        assertEquals("Le plat potion magique est prêt !", barde.messages.get(0));
+        assertEquals(Niveau.NORMAL, barde.niveaux.get(0));
+    }
+
+    @Test
+    void prévenirQuIlManqueDesIngrédientsPourLaProchaineFois() {
+        // Arrange
+        StockDouble stock = new StockDouble(
+                new ArrayList<>(List.of(
                         new Ingrédient("trèfle à 4 feuilles", 8),
                         new Ingrédient("fraise", 12),
                         new Ingrédient("once de lait de sanglier", 4),
@@ -413,7 +438,10 @@ public class JavanoramixTest {
         javanoramix.préparer(Recette.RECETTE_DE_LA_POTION_MAGIQUE);
 
         // Assert
-        assertEquals(barde.message, "Le plat potion magique est prêt !");
-        assertEquals(barde.niveau, Niveau.NORMAL);
+        assertEquals( "Il manque des ingrédients pour la prochaine fois !", barde.messages.get(0));
+        assertEquals(Niveau.IMPORTANT, barde.niveaux.get(0));
+
+        assertEquals("Le plat potion magique est prêt !", barde.messages.get(1));
+        assertEquals(Niveau.NORMAL, barde.niveaux.get(1));
     }
 }
