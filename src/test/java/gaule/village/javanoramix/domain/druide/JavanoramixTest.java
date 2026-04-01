@@ -3,11 +3,13 @@ package gaule.village.javanoramix.domain.druide;
 import gaule.village.javanoramix.domain.adapter.BardeDouble;
 import gaule.village.javanoramix.domain.adapter.CuiseurDouble;
 import gaule.village.javanoramix.domain.adapter.StockDouble;
+import gaule.village.javanoramix.domain.druide.cuiseur.CuiseurNonPréchaufféException;
 import gaule.village.javanoramix.domain.shared.Niveau;
 import gaule.village.javanoramix.domain.druide.cuiseur.AppareilDeCuisson;
 import gaule.village.javanoramix.domain.druide.stock.IngrédientManquantException;
 import gaule.village.javanoramix.domain.druide.stock.Stock;
 import gaule.village.javanoramix.domain.recette.*;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -443,5 +445,54 @@ public class JavanoramixTest {
 
         assertEquals("Le plat potion magique est prêt !", barde.messages.get(1));
         assertEquals(Niveau.NORMAL, barde.niveaux.get(1));
+    }
+
+    @Nested
+    class AlerterSiLeDruideNePeuxPasPréparerLePlat {
+
+        @Test
+        void alerterSiIlManqueDesIngrédients() {
+            StockDouble stock = new StockDouble(
+                    new ArrayList<>(List.of(
+                            new Ingrédient("trèfle à 4 feuilles", 0),
+                            new Ingrédient("fraise", 12),
+                            new Ingrédient("once de lait de sanglier", 4),
+                            new Ingrédient("pincée de curcuma", 10),
+                            new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
+                    ))
+            );
+            CuiseurDouble cuiseur = new CuiseurDouble();
+            BardeDouble barde = new BardeDouble();
+            Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
+
+
+            // Act +Assert
+            assertThrows(IngrédientManquantException.class, () -> javanoramix.préparer(Recette.RECETTE_DE_LA_POTION_MAGIQUE));
+            assertEquals( "Je ne peux pas préparer la recette de la potion magique !", barde.messages.get(0));
+            assertEquals(Niveau.URGENT, barde.niveaux.get(0));
+        }
+
+        @Test
+        void alerterSiLeCuiseurNePréchauffePas() {
+            // Arrange
+            StockDouble stock = new StockDouble(
+                    new ArrayList<>(List.of(
+                            new Ingrédient("trèfle à 4 feuilles", 8),
+                            new Ingrédient("fraise", 12),
+                            new Ingrédient("once de lait de sanglier", 4),
+                            new Ingrédient("pincée de curcuma", 10),
+                            new Ingrédient("feuille de gui coupée à la serpe d'or", 1)
+                    ))
+            );
+            CuiseurDouble cuiseur = new CuiseurDouble(CuiseurDouble.Etat.NON_PRÉCHAUFFÉ);
+            BardeDouble barde = new BardeDouble();
+            Druide javanoramix = new Javanoramix(stock, cuiseur, barde);
+
+
+            // Act + Assert
+            assertThrows(CuiseurNonPréchaufféException.class, () -> javanoramix.préparer(Recette.RECETTE_DE_LA_POTION_MAGIQUE));
+            assertEquals( "Je ne peux pas préparer la recette de la potion magique !", barde.messages.get(0));
+            assertEquals(Niveau.URGENT, barde.niveaux.get(0));
+        }
     }
 }
