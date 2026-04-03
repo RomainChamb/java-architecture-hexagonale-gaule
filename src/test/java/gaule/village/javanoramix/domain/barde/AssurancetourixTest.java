@@ -21,7 +21,8 @@ public class AssurancetourixTest {
         barde.chanter(message, niveau);
 
         // Assert
-        assertEquals(instrument.message, message);
+        assertEquals(instrument.messages.get(0), message);
+        assertEquals(instrument.niveaux.get(0), niveau);
     }
 
     @Test
@@ -29,7 +30,7 @@ public class AssurancetourixTest {
         // Arrange
         String message = "Message important !";
         Niveau niveau = Niveau.IMPORTANT;
-        String expectedMessage = "⚠ ATTENTION, BRAVES GAULOIS : %s, ⚠ ATTENTION, BRAVES GAULOIS : %s".formatted(message, message);
+        String expectedMessage = "⚠ ATTENTION, BRAVES GAULOIS : %s".formatted(message);
 
         InstrumentDeMusiqueDouble instrument = new InstrumentDeMusiqueDouble();
         Barde barde = new Assurancetourix(instrument);
@@ -38,7 +39,11 @@ public class AssurancetourixTest {
         barde.chanter(message, niveau);
 
         // Assert
-        assertEquals(instrument.message, expectedMessage);
+        assertEquals(instrument.messages.get(0), expectedMessage);
+        assertEquals(instrument.niveaux.get(0), niveau);
+
+        assertEquals(instrument.messages.get(1), expectedMessage);
+        assertEquals(instrument.niveaux.get(1), niveau);
     }
 
     @Test
@@ -46,7 +51,7 @@ public class AssurancetourixTest {
         // Arrange
         String message = "Message urgent !";
         Niveau niveau = Niveau.URGENT;
-        String expectedMessage = "%s, %s, %s".formatted(message.toUpperCase(), message.toUpperCase(), message.toUpperCase());
+        String expectedMessage = message.toUpperCase();
 
         InstrumentDeMusiqueDouble instrument = new InstrumentDeMusiqueDouble();
         Barde barde = new Assurancetourix(instrument);
@@ -55,6 +60,14 @@ public class AssurancetourixTest {
         barde.chanter(message, niveau);
 
         // Assert
-        assertEquals(instrument.message, expectedMessage);
+        assertEquals(instrument.messages.get(0), expectedMessage);
+        assertEquals(instrument.niveaux.get(0), niveau);
+
+        assertEquals(instrument.messages.get(1), expectedMessage);
+        assertEquals(instrument.niveaux.get(1), niveau);
+
+        assertEquals(instrument.messages.get(2), expectedMessage);
+        assertEquals(instrument.niveaux.get(2), niveau);
+
     }
 }
